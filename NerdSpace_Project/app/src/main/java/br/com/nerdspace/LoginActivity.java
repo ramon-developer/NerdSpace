@@ -39,11 +39,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if(firebaseAuth.getCurrentUser() !=null){
+        if(firebaseAuth.getCurrentUser() != null){
             //profile activity here
             finish();
             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-
         }
 
         progressDialog = new ProgressDialog(this);
@@ -86,6 +85,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             finish();
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }
+                        //else test for validation
+                        else {
+                            Toast.makeText(LoginActivity.this, "   Falha na Autenticação: \n" + "Email ou Senha incorretos!",
+                                    Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 });
     }
@@ -98,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if(view == textViewSignup){
             finish();
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, RegisterActivity.class));
         }
     }
 }

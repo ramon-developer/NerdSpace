@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Patterns;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,7 +23,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button buttonSignup;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private EditText editTextRepeatPassword;
     private TextView textViewSignin;
+
 
     private ProgressDialog progressDialog;
 
@@ -44,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //initializing views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextRepeatPassword = (EditText) findViewById(R.id.editTextRepeatPassword);
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
 
         buttonSignup = (Button) findViewById(R.id.buttomRegister);
@@ -58,26 +62,46 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerUser() {
+
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        String repeatPassword = editTextRepeatPassword.getText().toString().trim();
+
 
         if(TextUtils.isEmpty(email)){
-            //email is empty
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
-            //stop the function execution further
+            Toast.makeText(this, "É necessário cadastrar um Email", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
-            //password is empty
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
-            //stop the function execution further
+            Toast.makeText(this, "Por favor, digite uma Senha", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if(TextUtils.isEmpty(repeatPassword)){
+            Toast.makeText(this, "Por favor, repita a Senha", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(getApplicationContext(), "Email incorreto!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (password.length() < 6) {
+            Toast.makeText(getApplicationContext(), "Senha muito curta, por favor digite no mínimo 6 caracteres!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(!password.toString().equals(repeatPassword.toString())) {
+            Toast.makeText(getApplicationContext(), "Senhas incorreto!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //if validations are ok
         //we will first show a progressbar
 
-        progressDialog.setMessage("Registering User...");
+        progressDialog.setMessage("Registrando usuário...");
         progressDialog.show();
 
         firebaseAuth.createUserWithEmailAndPassword(email,password)
@@ -88,14 +112,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             finish();
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }else {
-                            Toast.makeText(RegisterActivity.this, "Could not register. Please try again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Falhou! O email já tem cadastro no sistema, por favor insira um novo email.", Toast.LENGTH_SHORT).show();
                         }
                         progressDialog.dismiss();
                     }
                 });
 
     }
-
 
     @Override
     public void onClick(View view){

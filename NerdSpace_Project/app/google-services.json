@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "558491654416",
+    "firebase_url": "https://nerdspace-7b522.firebaseio.com",
+    "project_id": "nerdspace-7b522",
+    "storage_bucket": "nerdspace-7b522.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558491654416:android:1e0c027a9c47ece3",
+        "android_client_info": {
+          "package_name": "br.com.nerdspace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558491654416-heb6c30ssltmgqc519sc009e8qe2aprk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDssIxYOFBpgjdq5CVOXp5F6Uuw73pMM5g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

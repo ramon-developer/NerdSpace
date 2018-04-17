@@ -17,25 +17,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button buttonSignIn;
+    private Button buttonSignup;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private TextView textViewSignup;
+    private TextView textViewSignin;
+
+    private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        buttonSignIn = (Button) findViewById(R.id.buttomSignin);
-        textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
+        setContentView(R.layout.activity_register);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -43,16 +39,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //profile activity here
             finish();
             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-
         }
+
+        //initializing views
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        textViewSignin = (TextView) findViewById(R.id.textViewSignin);
+
+        buttonSignup = (Button) findViewById(R.id.buttomRegister);
+
+//        textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
 
         progressDialog = new ProgressDialog(this);
 
-        buttonSignIn.setOnClickListener(this);
-        textViewSignup.setOnClickListener(this);
+        //attaching listener to button
+        buttonSignup.setOnClickListener(this);
+        textViewSignin.setOnClickListener(this);
     }
 
-    private void userLogin(){
+    private void registerUser() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -72,33 +77,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //if validations are ok
         //we will first show a progressbar
 
-        progressDialog.setMessage("Validando...");
+        progressDialog.setMessage("Registering User...");
         progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-
+                    public void onComplete(@NonNull Task<AuthResult> task){
                         if(task.isSuccessful()){
-                            //start the profile activity
                             finish();
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        }else {
+                            Toast.makeText(RegisterActivity.this, "Could not register. Please try again", Toast.LENGTH_SHORT).show();
                         }
+                        progressDialog.dismiss();
                     }
                 });
+
     }
+
 
     @Override
     public void onClick(View view){
-        if(view == buttonSignIn){
-            userLogin();
+
+        if (view == buttonSignup){
+            registerUser();
         }
 
-        if(view == textViewSignup){
-            finish();
+        if (view == textViewSignin){
+            //will open login activity here
             startActivity(new Intent(this, LoginActivity.class));
         }
     }
+
 }

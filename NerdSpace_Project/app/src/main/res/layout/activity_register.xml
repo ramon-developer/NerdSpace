@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
-
+    tools:context=".RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,42 +18,62 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="15dp"
-            android:text="Login"
+            android:text="Registre-se"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
+            android:layout_margin="15dp"
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
             android:hint="Email"
             android:inputType="textEmailAddress" />
 
         <EditText
+            android:layout_margin="15dp"
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
             android:hint="Senha"
             android:inputType="textPassword" />
 
-        <Button
-            android:id="@+id/buttomSignin"
+        <EditText
+            android:layout_margin="15dp"
+            android:id="@+id/editTextRepeatPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Repita a Senha"
+            android:inputType="textPassword" />
+
+        <Button
             android:layout_margin="15dp"
-            android:text="Entrar" />
+            android:id="@+id/buttomRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar" />
 
         <TextView
-            android:id="@+id/textViewSignUp"
+            android:textAlignment="center"
+            android:text="Já tem cadastro? Entre aqui."
+            android:id="@+id/textViewSignin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="Ainda não tem uma conta ? Cadastre-se aqui."
-            android:textAlignment="center" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 
 
 </android.support.constraint.ConstraintLayout>

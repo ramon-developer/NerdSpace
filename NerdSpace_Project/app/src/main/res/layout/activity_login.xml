@@ -54,6 +54,12 @@
             android:text="Ainda não tem uma conta? Cadastre-se aqui."
             android:textAlignment="center" />
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/googleSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp" />
+
     </LinearLayout>
 
 

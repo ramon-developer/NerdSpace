@@ -1,5 +1,6 @@
 package br.com.nerdspace;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,7 +41,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() !=null){
-            //profile activity here
             finish();
             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
         }
@@ -55,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //        textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
 
         progressDialog = new ProgressDialog(this);
+
 
         //attaching listener to button
         buttonSignup.setOnClickListener(this);
@@ -94,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
         if(!password.toString().equals(repeatPassword.toString())) {
-            Toast.makeText(getApplicationContext(), "Senhas incorreto!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "As senhas não conferem!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -109,15 +111,32 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task){
                         if(task.isSuccessful()){
+                            sendEmailVerification();
                             finish();
-                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                         }else {
                             Toast.makeText(RegisterActivity.this, "Falhou! O email já tem cadastro no sistema, por favor insira um novo email.", Toast.LENGTH_SHORT).show();
                         }
                         progressDialog.dismiss();
                     }
                 });
+    }
 
+    private void sendEmailVerification() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null){
+            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        FirebaseAuth.getInstance().signOut();
+//                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        Toast.makeText(RegisterActivity.this,"Enviamos um email de confirmação.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     @Override

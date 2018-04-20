@@ -27,6 +27,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.google.firebase:firebase-core:15.0.0' //alterar para compile
     implementation 'com.google.firebase:firebase-auth:15.0.0'
+    implementation 'com.google.android.gms:play-services-auth:15.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

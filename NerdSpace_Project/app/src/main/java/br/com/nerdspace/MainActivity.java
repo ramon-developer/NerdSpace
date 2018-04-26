@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() != null){
-            //profile activity here
             finish();
             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
         }
@@ -51,10 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
-
         buttonSignup = (Button) findViewById(R.id.buttomRegister);
-
-//        textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
 
         progressDialog = new ProgressDialog(this);
 
@@ -68,20 +64,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String password = editTextPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
-            //email is empty
+
             Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
-            //stop the function execution further
             return;
+
         }
 
         if(TextUtils.isEmpty(password)){
-            //password is empty
+
             Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
-            //stop the function execution further
             return;
+
         }
-        //if validations are ok
-        //we will first show a progressbar
 
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
@@ -94,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                            finish();
                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                        }else {
-                           Toast.makeText(MainActivity.this, "Could not register. Please try again", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(MainActivity.this, "Não foi possível registrar, tente novamente.", Toast.LENGTH_SHORT).show();
                        }
                        progressDialog.dismiss();
                    }
@@ -107,13 +101,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view){
 
         if (view == buttonSignup){
+
             registerUser();
+
         }
 
         if (view == textViewSignin){
-            //will open login activity here
+
             startActivity(new Intent(this, LoginActivity.class));
+
         }
+
     }
 
 }

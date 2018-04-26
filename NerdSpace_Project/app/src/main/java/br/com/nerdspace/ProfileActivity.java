@@ -26,27 +26,42 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() == null){
+
             finish();
             startActivity(new Intent(this, LoginActivity.class));
+
         }
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
-        textViewUserEmail.setText("Wellcome " +user.getEmail());
+        textViewUserEmail.setText("Olá, " + user.getEmail() +
+                                "\n\n Seja Bem-vindo! \n" +
+                                "\n\n Ainda não fui construído =/ " +
+                                "\n\n Mas não se preocupe," +
+                                "\n em breve nos encontraremos\n " +
+                                "e tenho certeza\n " +
+                                "que você irá adorar o nosso encontro! ...bye <3");
 
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
 
         buttonLogout.setOnClickListener(this);
 
-    }
+    } /***fim onCreate method ***/
+
 
     @Override
     public void onClick(View view) {
+
         if(view == buttonLogout){
+
             firebaseAuth.signOut();
             finish();
             startActivity(new Intent(this, LoginActivity.class));
+
         }
+
     }
-}
+
+} /***fim ProfileActivity ***/
+

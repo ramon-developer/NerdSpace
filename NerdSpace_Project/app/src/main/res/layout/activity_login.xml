@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
 
     <LinearLayout
         android:layout_width="match_parent"

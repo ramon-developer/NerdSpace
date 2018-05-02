@@ -65,19 +65,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(TextUtils.isEmpty(email)){
 
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Por favor, digite seu email.", Toast.LENGTH_SHORT).show();
             return;
 
         }
 
         if(TextUtils.isEmpty(password)){
 
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Por favor, digite a senha.", Toast.LENGTH_SHORT).show();
             return;
 
         }
 
-        progressDialog.setMessage("Registering User...");
+        progressDialog.setMessage("Registrando usuário...");
         progressDialog.show();
 
         firebaseAuth.createUserWithEmailAndPassword(email,password)

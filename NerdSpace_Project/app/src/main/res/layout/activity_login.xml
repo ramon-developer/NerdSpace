@@ -48,6 +48,14 @@
             android:text="Entrar" />
 
         <TextView
+            android:id="@+id/textViewForgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="Esqueci minha senha."
+            android:textAlignment="center" />
+
+        <TextView
             android:id="@+id/textViewSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

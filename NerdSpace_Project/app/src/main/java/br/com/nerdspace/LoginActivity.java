@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private TextView textViewForgotpassword;
     private TextView textViewSignup;
     private LoginButton mFacebookLoginButton;
     SignInButton signInButtonGoogle;
@@ -65,7 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttomSignin);
         textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
-        signInButtonGoogle = (SignInButton)findViewById(R.id.buttonGoogleSignIn);
+        signInButtonGoogle = (SignInButton) findViewById(R.id.buttonGoogleSignIn);
+        textViewForgotpassword = (TextView) findViewById(R.id.textViewForgotPassword);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -78,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         buttonSignIn.setOnClickListener(this);
         textViewSignup.setOnClickListener(this);
+        textViewForgotpassword.setOnClickListener(this);
 
         // Configura Google Sign in
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -276,18 +279,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view){
 
         if(view == buttonSignIn){
-
             userLogin();
-
         }
 
         if(view == textViewSignup){
-
             finish();
             startActivity(new Intent(this, RegisterActivity.class));
-
         }
 
+        if(view == textViewForgotpassword){
+            finish();
+            startActivity(new Intent(this, ForgotPasswordActivity.class));
+        }
     }
 
 

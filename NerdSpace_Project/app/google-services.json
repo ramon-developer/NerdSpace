@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "558491654416-ipe0ean61qvm7tfke624f31rdjkeeq63.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.nerdspace",
+            "certificate_hash": "a0c01727ee52ba394053f490193f46b3d3c91ebd"
+          }
+        },
+        {
+          "client_id": "558491654416-f8ipp41kog4auenqvn8jqgqi4757msc4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.nerdspace",
+            "certificate_hash": "5eadbdeba8ee7918d381d681ae5a4c775b7f541e"
+          }
+        },
+        {
           "client_id": "558491654416-heb6c30ssltmgqc519sc009e8qe2aprk.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,71 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558491654416-9iifpo1k9q90dcmr8q81faibkcvahing.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.nerdspace"
+              }
+            },
+            {
+              "client_id": "558491654416-heb6c30ssltmgqc519sc009e8qe2aprk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558491654416:android:87fcb66cc6ca320a",
+        "android_client_info": {
+          "package_name": "com.google.firebase.quickstart.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558491654416-rg20o4ggptfhu5hlsnbh4terpffvg37i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.firebase.quickstart.auth",
+            "certificate_hash": "a0c01727ee52ba394053f490193f46b3d3c91ebd"
+          }
+        },
+        {
+          "client_id": "558491654416-heb6c30ssltmgqc519sc009e8qe2aprk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDssIxYOFBpgjdq5CVOXp5F6Uuw73pMM5g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558491654416-9iifpo1k9q90dcmr8q81faibkcvahing.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.nerdspace"
+              }
+            },
+            {
+              "client_id": "558491654416-heb6c30ssltmgqc519sc009e8qe2aprk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

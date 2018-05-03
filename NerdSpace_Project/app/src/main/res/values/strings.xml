@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NerdSpace</string>
+    <string name="facebook_app_id">160132378014158</string>
+    <string name="fb_login_protocol_scheme">fb160132378014158</string>
 </resources>

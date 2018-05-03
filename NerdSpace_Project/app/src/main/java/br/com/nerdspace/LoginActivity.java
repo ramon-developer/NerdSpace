@@ -13,6 +13,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -36,9 +43,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView textViewSignup;
+    private LoginButton mFacebookLoginButton;
     SignInButton signInButtonGoogle;
+    private CallbackManager mCallbackManager;
 
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth mAuth;
     private ProgressDialog progressDialog;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -58,9 +67,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
         signInButtonGoogle = (SignInButton)findViewById(R.id.buttonGoogleSignIn);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-        if(firebaseAuth.getCurrentUser() != null){
+        if(mAuth.getCurrentUser() != null){
             finish();
             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
         }
@@ -90,6 +99,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         });
 
+        initComponent();
+        initFirebaseCallback();
+        onClickFacebookLoginButton();
+
     } /*** fim onCreate method ***/
 
 
@@ -116,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setMessage("Validando...");
         progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -161,9 +174,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             } catch (ApiException e){
                 // Falha ao logar na conta Google, mostra um log de falha
-                Log.w(TAG, "Falha ao logar com a conta Google", e);
+                Log.w(TAG, "Falha ao logar com a conta Google.", e);
             }
         }
+
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);//Facebook Login, verificar se é abaixo ou em cima.
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
@@ -174,7 +189,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 
-        firebaseAuth.signInWithCredential(credential)
+        mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -182,7 +197,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
 
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            FirebaseUser user = mAuth.getCurrentUser();
                             finish();
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
 
@@ -210,6 +225,50 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        startActivityForResult(signInIntent, 101);
 //    }
 
+    /*FACEBOOK COMPONENT*/
+    private void initComponent() {
+        mFacebookLoginButton = (LoginButton) findViewById(R.id.buttonFacebookSignin);
+        mFacebookLoginButton.setReadPermissions("email","public_profile");
+    }
+
+    private void initFirebaseCallback() {
+        mAuth = FirebaseAuth.getInstance();
+        mCallbackManager = CallbackManager.Factory.create();
+    }
+
+    private void firebaseAuthWithFacebook(AccessToken accessToken) {
+
+        progressDialog.setMessage("Validando...");
+        progressDialog.show();
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()) {
+
+                  Intent i = new Intent(LoginActivity.this, ProfileActivity.class);
+                  startActivity(i);
+//////                    FirebaseUser user = mAuth.getCurrentUser();
+//                    finish();
+//                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+
+                } else {
+
+                    Toast.makeText(LoginActivity.this, "   Falha na Autenticação: \n" + "Erro ao logar com Facebook.",
+                            Toast.LENGTH_LONG).show();
+
+                }
+
+                progressDialog.dismiss();
+
+            }
+        });
+    }
+
 
 
     /*** ações ao clicar nos botões ***/
@@ -232,7 +291,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+    private void onClickFacebookLoginButton() {
+
+        mFacebookLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                firebaseAuthWithFacebook(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                alert("Operação cancelada!");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                alert("Erro ao tentar logar com o Facebook!");
+            }
+        });
+
+    }
+
+
+    /*** Alert ***/
+    private void alert(String s) {
+
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+
+    }
 
 } /*** fim activity ***/
-
-

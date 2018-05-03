@@ -61,6 +61,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp">
         </com.google.android.gms.common.SignInButton>
+        
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/buttonFacebookSignin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp">
+        </com.facebook.login.widget.LoginButton>
 
     </LinearLayout>
 

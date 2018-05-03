@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -39,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                 "\n\n Seja Bem-vindo! \n" +
                                 "\n\n Ainda não fui construído =/ " +
                                 "\n\n Mas não se preocupe," +
-                                "\n em breve nos encontraremos\n " +
+                                "\n em breve estaremos juntos\n " +
                                 "e tenho certeza\n " +
                                 "que você irá adorar o nosso encontro! ...bye <3");
 
@@ -56,8 +57,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if(view == buttonLogout){
 
             firebaseAuth.signOut();
+            LoginManager.getInstance().logOut();
             finish();
-            startActivity(new Intent(this, LoginActivity.class));
 
         }
 

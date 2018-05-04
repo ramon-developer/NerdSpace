@@ -14,12 +14,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Registre-se"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/holo_orange_dark" />
 
         <EditText
             android:layout_margin="15dp"
@@ -46,18 +47,19 @@
             android:inputType="textPassword" />
 
         <Button
-            android:layout_margin="15dp"
             android:id="@+id/buttomRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:text="Registrar" />
 
         <TextView
-            android:textAlignment="center"
-            android:text="Já tem cadastro? Entre aqui."
             android:id="@+id/textViewSignin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Já tem cadastro? Entre aqui."
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark" />
 
     </LinearLayout>
 

@@ -288,7 +288,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if(view == textViewForgotpassword){
-            finish();
             startActivity(new Intent(this, ForgotPasswordActivity.class));
         }
     }

@@ -4,4 +4,5 @@
     <string name="fb_login_protocol_scheme">fb160132378014158</string>
     <string name="senha">Senha</string>
     <string name="email">Email</string>
+    <string name="esqueci_minha_senha"><u>Esqueci minha senha</u></string>
 </resources>

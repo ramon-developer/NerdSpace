@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    android:background="@drawable/ic_trianglify2" >
 
     <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar"-->
-
 
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
@@ -26,12 +26,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text="Login"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textColor="@android:color/holo_green_dark"
-        android:typeface="monospace"
+        android:typeface="sans"
         app:fontFamily="sans-serif-condensed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,16 +73,20 @@
 
     <Button
         android:id="@+id/buttomSignin"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="313dp"
-        android:layout_height="46dp"
+        android:layout_height="55dp"
         android:layout_margin="15dp"
         android:layout_marginEnd="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/shape"
+        android:backgroundTint="#48a81f"
         android:text="Entrar"
         android:textAllCaps="false"
+        android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="sans"
@@ -99,30 +103,36 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:text="Esqueci minha senha."
+        android:layout_marginTop="12dp"
+        android:text="@string/esqueci_minha_senha"
         android:textAlignment="center"
         android:textAllCaps="false"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="13sp"
         android:textStyle="italic"
         android:typeface="sans"
-        app:fontFamily="sans-serif"
+        app:fontFamily="sans-serif-condensed"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttomSignin" />
 
     <TextView
         android:id="@+id/textViewSignUp"
-        android:layout_width="312dp"
-        android:layout_height="17dp"
+        android:layout_width="340dp"
+        android:layout_height="19dp"
         android:layout_margin="15dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:text="Ainda não tem uma conta? Cadastre-se aqui."
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_dark"
+        android:textSize="14sp"
+        android:typeface="sans"
+        app:fontFamily="sans-serif-condensed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewForgotPassword" />
@@ -165,7 +175,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:text="ou"
-        android:textColor="?attr/colorButtonNormal"
+        android:textColor="@color/com_facebook_button_background_color_focused_disabled"
+        android:typeface="sans"
+        app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSignUp" />
